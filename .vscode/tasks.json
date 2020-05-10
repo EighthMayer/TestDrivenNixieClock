@@ -1,0 +1,71 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "switch to test view",
+            "command" : "${command:test-explorer.focus}"
+        },
+        {
+            "label": "run all tests",
+            "command" : "${command:test-explorer.run-all}",
+            "dependsOn": "switch to test view",
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            }
+        },
+        {
+            "label": "clean ceedling build artifacts (clobber)",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/+Tests/"
+            },
+            "command" : "ceedling clobber"
+        },
+        {
+            "label": "create ceedling c properties (win)",
+            "detail": "Create Ceedling (v0.29.1) C properties for ms-vscode.cpptools (v0.26.3) extension (windows-specific)",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args":  ["/V", "/C"]
+                },
+                "cwd": "${workspaceFolder}/.vscode/"
+            },
+            "command" : [
+                "echo ========creating Ceedling C properties for ms-vscode.cpptools extension========&&",
+                "set file=c_cpp_properties.json&&",
+                "gem which ceedling > !file!&&",
+                "set /p ceedlingPath=<!file!&&",
+                "set ceedlingPath=!ceedlingPath:\\=/!&&",
+                "set unityPath=!ceedlingPath:lib/ceedling.rb=vendor/unity/src!&&",
+                "set fffPath=!ceedlingPath:lib/ceedling.rb=plugins/fake_function_framework/vendor/fff!&&",
+                "set fffuhPath=!ceedlingPath:lib/ceedling.rb=plugins/fake_function_framework/src!&&",
+                "echo Unity includePath is !unityPath!&&",
+                "echo Fake Function Framework includePath is !fffPath!&&",
+                "echo FFF Unity Helper includePath is !fffuhPath!&&",
+                "echo.> !file!&&",
+                "set env_workaround=$&&",
+                "echo {>> !file!&&",
+                "echo     ^\"configurations^\": [>> !file!&&",
+                "echo         {>> !file!&&",
+                "echo             ^\"name^\": ^\"Win32^\",>> !file!&&",
+                "echo             ^\"includePath^\": [>> !file!&&",
+                "echo                 ^\"!env_workaround!{workspaceFolder}/**^\",>> !file!&&",
+                "echo                 ^\"!env_workaround!{workspaceFolder}/+Tests/build/test/mocks/**^\",>> !file!&&",
+                "echo                 ^\"!unityPath!^\",>> !file!&&",
+                "echo                 ^\"!fffPath!^\",>> !file!&&",
+                "echo                 ^\"!fffuhPath!^\">> !file!&&",
+                "echo             ],>> !file!&&",
+                "echo             ^\"cStandard^\": ^\"c11^\",>> !file!&&",
+                "echo             ^\"intelliSenseMode^\": ^\"gcc-x64^\">> !file!&&",
+                "echo         }>> !file!&&",
+                "echo     ],>> !file!&&",
+                "echo     ^\"version^\": ^4>> !file!&&",
+                "echo }>> !file!&&",
+                "echo DONE"
+            ]
+        }
+    ]
+}

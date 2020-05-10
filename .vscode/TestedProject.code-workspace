@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"path": "../"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.h": "c"
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"numaru.vscode-ceedling-test-adapter",
+			"hbenl.vscode-test-explorer"
+		]
+	}
+}
+
+
+//===Usage tips===
+// 1. To create C properties for ms-vscode.cpptools extension run "create ceedling c properties (win)" task (windows-specific).
+//
+// 2. When working on a particular module, enable autorun for it's tests. They would be executed when you save files.
+//
+// 3. Default build task (default shortcut is ctrl+shift+b) switches to test explorer view and runs all tests.
+//
+// 4. You may want to add shortcut for switching to test explorer view. I recommend to add this to your keybindings.json file
+//    (also you may need to merge this with your current array of keybindings):
+//    [
+//      {
+//        "key": "ctrl+alt+e",
+//        "command": "test-explorer.focus"
+//      }
+//    ]
+//
+// 5. Use task "clean ceedling build artifacts (clobber)" when ceedling build fails because of seemingly weird reasons.

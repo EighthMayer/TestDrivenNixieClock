@@ -1,0 +1,3 @@
+/.vscode/c_cpp_properties.json
+/+Tests/build/*
+!/+Tests/build/.gitkeep

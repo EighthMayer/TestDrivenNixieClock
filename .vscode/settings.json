@@ -1,0 +1,11 @@
+{
+    "editor.tabSize": 2,
+    "editor.insertSpaces": false,
+    "files.exclude": {
+        "**/.gitkeep": true,
+        ".gitignore": true,
+        "+Tests/build": true
+    },
+    "ceedlingExplorer.projectPath": "./+Tests/",
+    "ceedlingExplorer.debugConfiguration": "Ceedling Test Explorer Debug"
+}
